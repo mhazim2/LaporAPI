@@ -2,6 +2,7 @@ package com.example.laporapi;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Table;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "pelapor")
 @EntityListeners(AuditingEntityListener.class)
 public class Pelapor extends Person{
+    @Column(name = "nim")
     private String nim;
 
     public Pelapor() {

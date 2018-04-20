@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class PelaporController {
 
-    Pelapor pelapor;
+    private PelaporRepository pelaporRepository;
 
     @Autowired
-    public PelaporController(Pelapor pelapor) {
-        this.pelapor = pelapor;
+    public PelaporController(PelaporRepository pelaporRepository) {
+        this.pelaporRepository = pelaporRepository;
     }
 }

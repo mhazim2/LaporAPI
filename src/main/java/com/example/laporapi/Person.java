@@ -2,24 +2,28 @@ package com.example.laporapi;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
-@Component
+//@Component
 abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
+    @Column(name = "nama")
     private String nama;
 
     @NotBlank
+    @Column(name = "email")
     private String email;
 
     @NotBlank
+    @Column(name = "no_hp")
     private String no_hp;
 
     public Person() {
