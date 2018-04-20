@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
