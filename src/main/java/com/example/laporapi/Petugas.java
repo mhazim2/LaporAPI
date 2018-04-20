@@ -1,8 +1,19 @@
 package com.example.laporapi;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+@Table(name = "petugas")
 public class Petugas extends Person{
+    @NotBlank
     private String username;
+
+    @NotBlank
     private String password;
+
+    @NotBlank
     private String jabatan;
 
     public Petugas() {

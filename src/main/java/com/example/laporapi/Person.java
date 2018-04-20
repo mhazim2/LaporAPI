@@ -1,9 +1,25 @@
 package com.example.laporapi;
 
+import org.springframework.stereotype.Component;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
+@Component
 abstract class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String nama;
+
+    @NotBlank
     private String email;
+
+    @NotBlank
     private String no_hp;
 
     public Person() {
