@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
 @EnableJpaAuditing
-//@ComponentScan("com.example.laporapi")
 public class LaporApiApplication {
 
 	public static void main(String[] args) {

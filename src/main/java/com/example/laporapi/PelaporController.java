@@ -1,7 +1,10 @@
 package com.example.laporapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class PelaporController {
@@ -11,5 +14,10 @@ public class PelaporController {
     @Autowired
     public PelaporController(PelaporRepository pelaporRepository) {
         this.pelaporRepository = pelaporRepository;
+    }
+
+    @GetMapping("/pelapor")
+    public List<Pelapor> index(){
+        return pelaporRepository.findAll();
     }
 }
