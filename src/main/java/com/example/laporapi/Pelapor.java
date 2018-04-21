@@ -9,8 +9,6 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "pelapor")
 @EntityListeners(AuditingEntityListener.class)
 public class Pelapor extends Person{
-
-
     @NotBlank
     @Column(name = "nim")
     private String nim;
@@ -18,8 +16,8 @@ public class Pelapor extends Person{
     public Pelapor() {
     }
 
-    public Pelapor(Long id, String nama, String email, String no_hp, @NotBlank String nim) {
-        super(id, nama, email, no_hp);
+    public Pelapor(@NotBlank String nama, @NotBlank String email, @NotBlank String no_hp, @NotBlank String nim) {
+        super(nama, email, no_hp);
         this.nim = nim;
     }
 

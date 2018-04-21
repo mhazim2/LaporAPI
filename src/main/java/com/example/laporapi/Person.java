@@ -1,15 +1,17 @@
 package com.example.laporapi;
 
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-abstract class Person {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@EntityListeners(AuditingEntityListener.class)
+public abstract class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotBlank
@@ -27,8 +29,7 @@ abstract class Person {
     public Person() {
     }
 
-    public Person(Long id, String nama, String email, String no_hp) {
-        this.id = id;
+    public Person(@NotBlank String nama, @NotBlank String email, @NotBlank String no_hp) {
         this.nama = nama;
         this.email = email;
         this.no_hp = no_hp;
@@ -66,13 +67,4 @@ abstract class Person {
         this.no_hp = no_hp;
     }
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", nama='" + nama + '\'' +
-                ", email='" + email + '\'' +
-                ", no_hp='" + no_hp + '\'' +
-                '}';
-    }
 }
