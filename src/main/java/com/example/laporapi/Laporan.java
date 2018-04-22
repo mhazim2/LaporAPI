@@ -17,7 +17,7 @@ import java.util.Date;
 public class Laporan {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @NotBlank
