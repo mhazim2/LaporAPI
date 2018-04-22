@@ -10,10 +10,6 @@ import javax.validation.constraints.NotBlank;
 @EntityListeners(AuditingEntityListener.class)
 public class Pelapor extends Person{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @NotBlank
     @Column(name = "nim")
     private String nim;
