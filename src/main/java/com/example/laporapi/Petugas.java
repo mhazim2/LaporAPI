@@ -1,13 +1,16 @@
 package com.example.laporapi;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "petugas")
 public class Petugas extends Person{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @NotBlank
     @Column(name = "username")
     private String username;

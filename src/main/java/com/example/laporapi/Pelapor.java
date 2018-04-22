@@ -9,6 +9,11 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "pelapor")
 @EntityListeners(AuditingEntityListener.class)
 public class Pelapor extends Person{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @NotBlank
     @Column(name = "nim")
     private String nim;
