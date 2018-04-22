@@ -10,9 +10,10 @@ import javax.validation.constraints.NotBlank;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners(AuditingEntityListener.class)
 public abstract class Person {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-//    private Long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NotBlank
     @Column(name = "nama")
@@ -33,6 +34,14 @@ public abstract class Person {
         this.nama = nama;
         this.email = email;
         this.no_hp = no_hp;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNama() {
