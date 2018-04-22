@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @EntityListeners(AuditingEntityListener.class)
-public abstract class Person {
+public  abstract class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

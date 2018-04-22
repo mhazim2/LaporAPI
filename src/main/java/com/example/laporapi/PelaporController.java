@@ -49,9 +49,8 @@ public class PelaporController {
     }
 
     @DeleteMapping("/pelapor/{id}")
-    public boolean delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id){
         Pelapor pelapor = pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
         pelaporRepository.delete(pelapor);
-        return true;
     }
 }
