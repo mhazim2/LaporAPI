@@ -8,6 +8,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "petugas")
 public class Petugas extends Person{
+
     @NotBlank
     @Column(name = "username")
     private String username;
