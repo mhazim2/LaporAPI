@@ -42,8 +42,7 @@ public class Laporan {
     @LastModifiedDate
     protected Date updatedAt;
 
-    @ColumnDefault(value = "false")
-    protected boolean status;
+    protected boolean status = false;
 
     public Laporan() {
     }
@@ -120,6 +119,10 @@ public class Laporan {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public boolean getStatus(){
+        return this.status;
     }
 
     @Override

@@ -1,10 +1,7 @@
 package com.example.laporapi;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,5 +24,22 @@ public class LaporanController {
     @PostMapping("/laporan")
     public Laporan create(@Valid @RequestBody Laporan laporan) {
         return laporanRepository.save(laporan);
+    }
+
+    @PutMapping("/laporan/{id}")
+    public Laporan update(@PathVariable(value = "id") Long id, @Valid @RequestBody Laporan body) {
+        Laporan laporan = laporanRepository.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Id " + id.toString() + " not found"));
+        laporan.setDeskripsi(body.getDeskripsi());
+        laporan.setFoto(body.getFoto());
+        laporan.setJenis_laporan(body.getJenis_laporan());
+        laporan.setStatus(body.getStatus());
+        laporan.setTempat(body.getTempat());
+        return laporan;
+    }
+
+    @DeleteMapping("/laporan/{id}")
+    public void delete(@PathVariable Long id) {
+        Laporan laporan = laporanRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id " + id.toString() + " not found"));
+        laporanRepository.delete(laporan);
     }
 }
