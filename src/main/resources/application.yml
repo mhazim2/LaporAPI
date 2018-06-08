@@ -1,0 +1,68 @@
+## File Storage Properties
+file:
+    # All files uploaded through the REST API will be stored in this directory
+    upload-dir: ./uploads
+server:
+    port: 8080
+spring:
+    ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+    datasource:
+        password: ''
+        url: jdbc:mysql://localhost:3306/restapi
+        username: root
+    jpa:
+        # Hibernate ddl auto (create, create-drop, validate, update)
+        hibernate:
+            ddl-auto: update
+        properties:
+            # The SQL dialect makes Hibernate generate better SQL for the chosen database
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        show-sql: true
+
+    ## MULTIPART (MultipartProperties)
+    servlet:
+        multipart:
+            # Enable multipart uploads
+            enabled: true
+            # Threshold after which files are written to disk.
+            file-size-threshold: 2KB
+            # Max file size.
+            max-file-size: 50MB
+            # Max Request Size
+            max-request-size: 75MB
+
+
+
+### application.properties ###
+
+#server.port=8080
+#
+#
+## Enable multipart uploads
+#spring.servlet.multipart.enabled=true
+## Threshold after which files are written to disk.
+#spring.servlet.multipart.file-size-threshold=2KB
+## Max file size.
+#spring.servlet.multipart.max-file-size=50MB
+## Max Request Size
+#spring.servlet.multipart.max-request-size=75MB
+#
+### File Storage Properties
+## All files uploaded through the REST API will be stored in this directory
+#file.upload-dir=./uploads
+#
+### Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
+#spring.datasource.url = jdbc:mysql://localhost:3306/restapi
+#spring.datasource.username = root
+#spring.datasource.password =
+#
+#
+### Hibernate Properties
+## The SQL dialect makes Hibernate generate better SQL for the chosen database
+#spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+#
+#spring.jpa.show-sql=true
+#
+## Hibernate ddl auto (create, create-drop, validate, update)
+#spring.jpa.hibernate.ddl-auto = update
