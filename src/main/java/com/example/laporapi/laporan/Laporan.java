@@ -1,4 +1,4 @@
-package com.example.laporapi;
+package com.example.laporapi.laporan;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
@@ -127,7 +127,7 @@ public class Laporan {
 
     @Override
     public String toString() {
-        return "Laporan{" +
+        return "laporan{" +
                 "id=" + id +
                 ", jenis_laporan='" + jenis_laporan + '\'' +
                 ", deskripsi='" + deskripsi + '\'' +

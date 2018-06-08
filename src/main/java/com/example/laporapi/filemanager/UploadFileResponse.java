@@ -1,4 +1,4 @@
-package com.example.laporapi;
+package com.example.laporapi.filemanager;
 
 public class UploadFileResponse {
     private String fileName;

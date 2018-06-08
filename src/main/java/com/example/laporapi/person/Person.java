@@ -1,4 +1,4 @@
-package com.example.laporapi;
+package com.example.laporapi.person;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;

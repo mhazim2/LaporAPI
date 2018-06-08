@@ -1,4 +1,6 @@
-package com.example.laporapi;
+package com.example.laporapi.person.petugas;
+
+import com.example.laporapi.person.Person;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "petugas")
-public class Petugas extends Person{
+public class Petugas extends Person {
 
     @NotBlank
     @Column(name = "username")

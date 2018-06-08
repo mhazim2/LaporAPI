@@ -1,5 +1,6 @@
-package com.example.laporapi;
+package com.example.laporapi.person.pelapor;
 
+import com.example.laporapi.person.Person;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Entity
 @Table(name = "pelapor")
 @EntityListeners(AuditingEntityListener.class)
-public class Pelapor extends Person{
+public class Pelapor extends Person {
 
     @NotBlank
     @Column(name = "nim")

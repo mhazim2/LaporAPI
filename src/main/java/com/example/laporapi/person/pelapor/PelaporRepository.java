@@ -1,4 +1,4 @@
-package com.example.laporapi;
+package com.example.laporapi.person.pelapor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

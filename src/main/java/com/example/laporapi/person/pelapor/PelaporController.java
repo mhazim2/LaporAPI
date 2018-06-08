@@ -1,12 +1,11 @@
-package com.example.laporapi;
+package com.example.laporapi.person.pelapor;
 
+import com.example.laporapi.exceptionhandler.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.function.Supplier;
 
 @RestController
 public class PelaporController {

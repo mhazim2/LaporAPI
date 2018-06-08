@@ -1,4 +1,4 @@
-package com.example.laporapi;
+package com.example.laporapi.filemanager;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

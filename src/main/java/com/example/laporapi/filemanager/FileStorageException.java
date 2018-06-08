@@ -1,4 +1,4 @@
-package com.example.laporapi;
+package com.example.laporapi.filemanager;
 
 public class FileStorageException extends RuntimeException {
     public FileStorageException(String message) {

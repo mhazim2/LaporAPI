@@ -1,4 +1,4 @@
-package com.example.laporapi;
+package com.example.laporapi.filemanager;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

@@ -1,5 +1,6 @@
-package com.example.laporapi;
+package com.example.laporapi.laporan;
 
+import com.example.laporapi.exceptionhandler.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
