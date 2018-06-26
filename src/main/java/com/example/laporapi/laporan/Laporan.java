@@ -1,6 +1,10 @@
 package com.example.laporapi.laporan;
 
+import com.example.laporapi.person.pelapor.Pelapor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -20,16 +24,18 @@ public class Laporan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @NotBlank
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pelapor_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Pelapor pelapor;
+
     protected String jenis_laporan;
 
-    @NotBlank
     protected String deskripsi;
 
-    @NotBlank
     protected String tempat;
 
-    @NotBlank
     protected String foto;
 
     @Column(nullable = false, updatable = false)
