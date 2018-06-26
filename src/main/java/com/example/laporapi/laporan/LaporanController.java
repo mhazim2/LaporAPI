@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class LaporanController {
 
     private LaporanRepository laporanRepository;

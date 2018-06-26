@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -20,16 +21,19 @@ public class Laporan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @NotBlank
+    @NotNull
+    protected Long id_pelapor;
+
+    @NotNull
     protected String jenis_laporan;
 
-    @NotBlank
+    @NotNull
     protected String deskripsi;
 
-    @NotBlank
+    @NotNull
     protected String tempat;
 
-    @NotBlank
+    @NotNull
     protected String foto;
 
     @Column(nullable = false, updatable = false)
