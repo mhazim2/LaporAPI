@@ -7,9 +7,9 @@ server:
 spring:
     ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
     datasource:
-        password: ''
         url: jdbc:mysql://localhost:3306/restapi
         username: root
+        password: ''
     jpa:
         # Hibernate ddl auto (create, create-drop, validate, update)
         hibernate:

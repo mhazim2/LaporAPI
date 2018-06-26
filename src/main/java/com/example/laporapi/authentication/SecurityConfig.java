@@ -32,15 +32,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usersByUsernameQuery("select username, password, enabled"
                         + " from users where username=?")
                 .authoritiesByUsernameQuery("select username, authority "
-                        + "from authorities where username=?")
-                .passwordEncoder(new BCryptPasswordEncoder());
+                        + "from authorities where username=?");
+//                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     // Authorization : Role -> Access
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().and().authorizeRequests().antMatchers("/laporan/**", "/uploadFile/**", "/downloadFile/**")
-                .hasRole("ADMIN").antMatchers("/**").hasRole("USER").and()
+                .hasRole("USER").antMatchers("/**").hasRole("ADMIN").and()
                 .csrf().disable().headers().frameOptions().disable();
     }
 
