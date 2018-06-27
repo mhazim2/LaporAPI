@@ -1,12 +1,18 @@
 package com.example.laporapi.laporan;
 
+import com.example.laporapi.person.pelapor.Pelapor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.internal.constraintvalidators.bv.NotBlankValidator;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import javax.validation.Constraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -21,19 +27,20 @@ public class Laporan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @NotNull
-    protected Long id_pelapor;
+    @ManyToOne
+    @JoinColumn(name="pelapor_id")
+    protected Pelapor pelapor;
 
-    @NotNull
+    @NotBlank
     protected String jenis_laporan;
 
-    @NotNull
+    @NotBlank
     protected String deskripsi;
 
-    @NotNull
+    @NotBlank
     protected String tempat;
 
-    @NotNull
+    @NotBlank
     protected String foto;
 
     @Column(nullable = false, updatable = false)
@@ -46,12 +53,14 @@ public class Laporan {
     @LastModifiedDate
     protected Date updatedAt;
 
-    protected boolean status = false;
+    protected int status;
 
     public Laporan() {
+        status = 2;
     }
 
-    public Laporan(@NotBlank String jenis_laporan, @NotBlank String deskripsi, @NotBlank String tempat, @NotBlank String foto, Date createdAt, Date updatedAt, boolean status) {
+    public Laporan(Pelapor pelapor, @NotBlank String jenis_laporan, @NotBlank String deskripsi, @NotBlank String tempat, @NotBlank String foto, Date createdAt, Date updatedAt, int status) {
+        this.pelapor = pelapor;
         this.jenis_laporan = jenis_laporan;
         this.deskripsi = deskripsi;
         this.tempat = tempat;
@@ -67,6 +76,14 @@ public class Laporan {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Pelapor getPelapor() {
+        return pelapor;
+    }
+
+    public void setPelapor(Pelapor pelapor) {
+        this.pelapor = pelapor;
     }
 
     public String getJenis_laporan() {
@@ -117,29 +134,11 @@ public class Laporan {
         this.updatedAt = updatedAt;
     }
 
-    public boolean isStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(int status) {
         this.status = status;
-    }
-
-    public boolean getStatus(){
-        return this.status;
-    }
-
-    @Override
-    public String toString() {
-        return "laporan{" +
-                "id=" + id +
-                ", jenis_laporan='" + jenis_laporan + '\'' +
-                ", deskripsi='" + deskripsi + '\'' +
-                ", tempat='" + tempat + '\'' +
-                ", foto='" + foto + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", status=" + status +
-                '}';
     }
 }

@@ -1,10 +1,13 @@
 package com.example.laporapi.person.pelapor;
 
+import com.example.laporapi.laporan.Laporan;
 import com.example.laporapi.person.Person;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.awt.print.Book;
+import java.util.List;
 
 @Entity
 @Table(name = "pelapor")
@@ -15,12 +18,16 @@ public class Pelapor extends Person {
     @Column(name = "nim")
     private String nim;
 
+    @OneToMany(mappedBy = "pelapor")
+    private List<Laporan> laporans;
+
     public Pelapor() {
     }
 
-    public Pelapor(@NotBlank String nama, @NotBlank String email, @NotBlank String no_hp, @NotBlank String nim) {
+    public Pelapor(@NotBlank String nama, @NotBlank String email, @NotBlank String no_hp, @NotBlank String nim, List<Laporan> laporans) {
         super(nama, email, no_hp);
         this.nim = nim;
+        this.laporans = laporans;
     }
 
     public String getNim() {
@@ -29,5 +36,21 @@ public class Pelapor extends Person {
 
     public void setNim(String nim) {
         this.nim = nim;
+    }
+
+    public List<Laporan> getLaporans() {
+        return laporans;
+    }
+
+    public void setLaporans(List<Laporan> laporans) {
+        this.laporans = laporans;
+    }
+
+    @Override
+    public String toString() {
+        return "Pelapor{" +
+                "nim='" + nim + '\'' +
+                ", laporans=" + laporans +
+                '}';
     }
 }
