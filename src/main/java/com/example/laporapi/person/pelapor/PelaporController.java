@@ -33,6 +33,7 @@ public class PelaporController {
     @GetMapping("/pelapor/{id}")
     public Pelapor show(@PathVariable(value = "id") Long id){
         return pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
+//        return pelaporRepository.findByIDq(id);
     }
 
     @GetMapping("/pelapor/nim/{nim}")

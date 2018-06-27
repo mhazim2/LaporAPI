@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.nio.file.ReadOnlyFileSystemException;
 import java.util.List;
 
 @RestController
@@ -50,6 +51,7 @@ public class PetugasController{
         petugas.setUsername(body.getUsername());
         petugas.setEmail(body.getEmail());
         petugas.setNo_hp(body.getNo_hp());
+        usersRepository.save(usersRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         authoritiesRepository.save(authoritiesRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         return petugasRepository.save(petugas);
     }
@@ -57,6 +59,7 @@ public class PetugasController{
     @DeleteMapping("/petugas/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         Petugas petugas = petugasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ID" + id.toString() + "Not Found"));
+        usersRepository.delete(usersRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         authoritiesRepository.delete(authoritiesRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         petugasRepository.delete(petugas);
     }
