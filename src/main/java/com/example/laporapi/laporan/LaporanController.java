@@ -1,6 +1,7 @@
 package com.example.laporapi.laporan;
 
 import com.example.laporapi.exceptionhandler.ResourceNotFoundException;
+import com.example.laporapi.person.pelapor.Pelapor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,11 @@ public class LaporanController {
     @PostMapping("/laporan")
     public Laporan create(@Valid @RequestBody Laporan laporan) {
         return laporanRepository.save(laporan);
+    }
+
+    @GetMapping("/laporan/{id}")
+    public Laporan show(@PathVariable(value = "id") Long id){
+        return laporanRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
     }
 
     @PutMapping("/laporan/{id}")
