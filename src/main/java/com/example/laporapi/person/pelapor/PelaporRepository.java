@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PelaporRepository extends JpaRepository<Pelapor, Long> {
-
+    Pelapor findByNim(String nim);
 }

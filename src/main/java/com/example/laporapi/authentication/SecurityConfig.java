@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -27,15 +28,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("dataSource")
     private DataSource dataSource;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        auth.jdbcAuthentication().dataSource(dataSource)
+//                .usersByUsernameQuery("select username, password, enabled"
+//                        + " from user where username=?")
+//                .authoritiesByUsernameQuery("select username, authority "
+//                        + "from authorities where username=?")
+//                .passwordEncoder(new BCryptPasswordEncoder());
+//    }
 
-        auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select username, password, enabled"
-                        + " from users where username=?")
-                .authoritiesByUsernameQuery("select username, authority "
-                        + "from authorities where username=?")
-                .passwordEncoder(new BCryptPasswordEncoder());
+        @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception{
+        auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .withUser("test").password("test123").roles("USER").and()
+                .withUser("test1").password("test123").roles("ADMIN");
     }
 
     // Authorization : Role -> Access
@@ -43,13 +51,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and().authorizeRequests()
-                .antMatchers("/laporan/**", "/uploadFile/**", "/downloadFile/**")
-                .hasAnyRole("USER", "ADMIN").antMatchers("/**").hasRole("ADMIN").and()
-                .csrf().disable().headers().frameOptions().disable();
+                    .antMatchers(HttpMethod.POST, "/laporan/**", "/uploadFile/**")
+                        .anonymous()
+                    .antMatchers(HttpMethod.GET, "/petugas/**")
+                        .hasRole("ADMIN")
+                    .antMatchers(HttpMethod.POST, "/petugas/**")
+                        .hasRole("ADMIN")
+                    .antMatchers(HttpMethod.PUT, "/petugas/**")
+                        .hasRole("ADMIN")
+                    .antMatchers(HttpMethod.DELETE, "/petugas/**")
+                        .hasRole("ADMIN")
+                .and().csrf().disable().headers().frameOptions().disable();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**", "/laporan/**");
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
     }
 }

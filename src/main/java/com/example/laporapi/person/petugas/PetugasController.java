@@ -2,6 +2,7 @@ package com.example.laporapi.person.petugas;
 
 import com.example.laporapi.exceptionhandler.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -12,10 +13,12 @@ import java.util.List;
 public class PetugasController{
 
     private PetugasRepository petugasRepository;
+    private AuthoritiesRepository authoritiesRepository;
 
     @Autowired
-    public PetugasController(PetugasRepository petugasRepository) {
+    public PetugasController(PetugasRepository petugasRepository, AuthoritiesRepository authoritiesRepository) {
         this.petugasRepository = petugasRepository;
+        this.authoritiesRepository = authoritiesRepository;
     }
 
     @GetMapping("/petugas")
@@ -30,6 +33,8 @@ public class PetugasController{
 
     @PostMapping("/petugas")
     public Petugas create(@Valid @RequestBody Petugas petugas) {
+        petugas.setPassword(new BCryptPasswordEncoder().encode(petugas.getPassword()));
+        authoritiesRepository.save(new Authorities(petugas.getUsername()));
         return petugasRepository.save(petugas);
     }
 
@@ -38,16 +43,18 @@ public class PetugasController{
         Petugas petugas = petugasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ID" + id.toString() + "Not Found"));
         petugas.setNama(body.getNama());
         petugas.setJabatan(body.getJabatan());
-        petugas.setPassword(body.getPassword());
+        petugas.setPassword(new BCryptPasswordEncoder().encode(body.getPassword()));
         petugas.setUsername(body.getUsername());
         petugas.setEmail(body.getEmail());
         petugas.setNo_hp(body.getNo_hp());
+        authoritiesRepository.save(authoritiesRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         return petugasRepository.save(petugas);
     }
 
     @DeleteMapping("/petugas/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         Petugas petugas = petugasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ID" + id.toString() + "Not Found"));
+        authoritiesRepository.delete(authoritiesRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         petugasRepository.delete(petugas);
     }
 }

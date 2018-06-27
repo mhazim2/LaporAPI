@@ -35,6 +35,11 @@ public class PelaporController {
         return pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
     }
 
+    @GetMapping("/pelapor/nim/{nim}")
+    public Pelapor showByNIM(@PathVariable(value = "nim") String nim){
+        return pelaporRepository.findByNim(nim);
+    }
+
 //    @GetMapping("/pelapor/{id}/laporan")
 //    public List<Laporan> showLaporans(@PathVariable(value = "id") Long id){
 //        Pelapor pelapor = pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));

@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "petugas")
+@Table(name = "user")
 public class Petugas extends Person {
 
     @NotBlank
@@ -22,6 +22,8 @@ public class Petugas extends Person {
     @NotBlank
     @Column(name = "jabatan")
     private String jabatan;
+
+    private boolean enable = true;
 
     public Petugas() {
     }

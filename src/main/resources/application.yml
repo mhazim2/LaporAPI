@@ -3,7 +3,7 @@ file:
     # All files uploaded through the REST API will be stored in this directory
     upload-dir: ./uploads
 server:
-    port: 8080
+    port: 8000
 spring:
     ## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
     mvc:
