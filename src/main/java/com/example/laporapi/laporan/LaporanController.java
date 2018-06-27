@@ -1,9 +1,12 @@
 package com.example.laporapi.laporan;
 
 import com.example.laporapi.exceptionhandler.ResourceNotFoundException;
+import com.example.laporapi.filemanager.FileStorageService;
 import com.example.laporapi.person.pelapor.Pelapor;
+import com.example.laporapi.person.pelapor.PelaporRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -13,6 +16,10 @@ import java.util.List;
 public class LaporanController {
 
     private LaporanRepository laporanRepository;
+    private FileStorageService fileStorageService;
+
+    public LaporanController() {
+    }
 
     @Autowired
     public LaporanController(LaporanRepository laporanRepository) {
@@ -26,12 +33,19 @@ public class LaporanController {
 
     @PostMapping("/laporan")
     public Laporan create(@Valid @RequestBody Laporan laporan) {
+//        String fileName = fileStorageService.storeFile(laporan.getFoto(), laporan.getId());
+//        laporan.setFoto(fileName);
         return laporanRepository.save(laporan);
     }
 
     @GetMapping("/laporan/{id}")
     public Laporan show(@PathVariable(value = "id") Long id){
         return laporanRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
+    }
+
+    @GetMapping("/laporan/pelapor/{id}")
+    public List<Laporan> showLaporansPelapor(@PathVariable(value = "id") Long id){
+        return laporanRepository.findByPelaporId(id);//orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
     }
 
     @PutMapping("/laporan/{id}")

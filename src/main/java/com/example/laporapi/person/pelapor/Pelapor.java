@@ -18,7 +18,6 @@ public class Pelapor extends Person {
     @Column(name = "nim")
     private String nim;
 
-//    @OneToMany(mappedBy = "pelapor")
 //    private List<Laporan> laporans;
 
     public Pelapor() {
@@ -38,6 +37,7 @@ public class Pelapor extends Person {
         this.nim = nim;
     }
 
+//    @OneToMany(mappedBy = "pelapor", cascade = CascadeType.ALL)
 //    public List<Laporan> getLaporans() {
 //        return laporans;
 //    }
@@ -45,12 +45,4 @@ public class Pelapor extends Person {
 //    public void setLaporans(List<Laporan> laporans) {
 //        this.laporans = laporans;
 //    }
-
-    @Override
-    public String toString() {
-        return "Pelapor{" +
-                "nim='" + nim + '\'' +
-//                ", laporans=" + laporans +
-                '}';
-    }
 }

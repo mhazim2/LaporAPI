@@ -25,35 +25,35 @@ public class Laporan {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "pelapor_id")
-    protected Pelapor pelapor;
+    private Pelapor pelapor;
 
     @NotBlank
-    protected String jenis_laporan;
+    private String jenis_laporan;
 
     @NotBlank
-    protected String deskripsi;
+    private String deskripsi;
 
     @NotBlank
-    protected String tempat;
+    private String tempat;
 
     @NotBlank
-    protected String foto;
+    private String foto;
 
     @Column(nullable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    protected Date createdAt;
+    private Date createdAt;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    protected Date updatedAt;
+    private Date updatedAt;
 
-    protected int status;
+    private int status;
 
     public Laporan() {
         status = 2;

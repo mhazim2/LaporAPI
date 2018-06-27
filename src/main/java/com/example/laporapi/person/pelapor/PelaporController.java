@@ -1,6 +1,7 @@
 package com.example.laporapi.person.pelapor;
 
 import com.example.laporapi.exceptionhandler.ResourceNotFoundException;
+import com.example.laporapi.laporan.Laporan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,10 +24,22 @@ public class PelaporController {
         return pelaporRepository.findAll();
     }
 
+//    @GetMapping("/pelapor/laporan")
+//    public List<Laporan> indexLaporans(){
+//        List<Pelapor> pelapor = pelaporRepository.findAll();
+//        return
+//    }
+
     @GetMapping("/pelapor/{id}")
     public Pelapor show(@PathVariable(value = "id") Long id){
         return pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
     }
+
+//    @GetMapping("/pelapor/{id}/laporan")
+//    public List<Laporan> showLaporans(@PathVariable(value = "id") Long id){
+//        Pelapor pelapor = pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
+//        return pelapor.getLaporans();
+//    }
 
     @PostMapping("/pelapor")
     public Pelapor create(@Valid @RequestBody Pelapor pelapor){

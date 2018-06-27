@@ -41,7 +41,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // Authorization : Role -> Access
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().and().authorizeRequests().antMatchers("/laporan/**", "/uploadFile/**", "/downloadFile/**")
+        http.httpBasic()
+                .and().authorizeRequests()
+                .antMatchers("/laporan/**", "/uploadFile/**", "/downloadFile/**")
                 .hasAnyRole("USER", "ADMIN").antMatchers("/**").hasRole("ADMIN").and()
                 .csrf().disable().headers().frameOptions().disable();
     }
