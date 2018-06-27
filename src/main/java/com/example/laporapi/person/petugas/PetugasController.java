@@ -24,6 +24,11 @@ public class PetugasController{
         this.authoritiesRepository = authoritiesRepository;
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "accept";
+    }
+
     @GetMapping("/petugas")
     public List<Petugas> index() {
         return petugasRepository.findAll();
