@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Authorities {
+    @Id
     @NotNull
     private String username;
 
@@ -12,7 +13,7 @@ public class Authorities {
     private String authority = "ROLE_ADMIN";
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "users_id", nullable = false)
     private Users users;
 
     public Authorities() {

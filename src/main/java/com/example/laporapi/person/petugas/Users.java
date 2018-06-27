@@ -13,11 +13,11 @@ public class Users {
     private String password;
 
     @NotNull
-    private short enable = 1;
+    private boolean enabled = true;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "petugas_id", nullable = false)
-//    private Petugas petugas;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "petugas_id", nullable = false)
+    private Petugas petugas;
 
     public Users() {
     }
@@ -25,7 +25,7 @@ public class Users {
     public Users(String username, String password, Petugas petugas) {
         this.username = username;
         this.password = password;
-//        this.petugas = petugas;
+        this.petugas = petugas;
     }
 
     public String getUsername() {
@@ -44,19 +44,19 @@ public class Users {
         this.password = password;
     }
 
-    public short getEnable() {
-        return enable;
+    public boolean getEnabled() {
+        return enabled;
     }
 
-    public void setEnable(short enable) {
-        this.enable = enable;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-//    public Petugas getPetugas() {
-//        return petugas;
-//    }
-//
-//    public void setPetugas(Petugas petugas) {
-//        this.petugas = petugas;
-//    }
+    public Petugas getPetugas() {
+        return petugas;
+    }
+
+    public void setPetugas(Petugas petugas) {
+        this.petugas = petugas;
+    }
 }
