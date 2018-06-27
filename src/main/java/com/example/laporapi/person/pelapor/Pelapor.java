@@ -18,16 +18,16 @@ public class Pelapor extends Person {
     @Column(name = "nim")
     private String nim;
 
-    @OneToMany(mappedBy = "pelapor")
-    private List<Laporan> laporans;
+//    @OneToMany(mappedBy = "pelapor")
+//    private List<Laporan> laporans;
 
     public Pelapor() {
     }
 
-    public Pelapor(@NotBlank String nama, @NotBlank String email, @NotBlank String no_hp, @NotBlank String nim, List<Laporan> laporans) {
+    public Pelapor(@NotBlank String nama, @NotBlank String email, @NotBlank String no_hp, @NotBlank String nim) {
         super(nama, email, no_hp);
         this.nim = nim;
-        this.laporans = laporans;
+//        this.laporans = laporans;
     }
 
     public String getNim() {
@@ -38,19 +38,19 @@ public class Pelapor extends Person {
         this.nim = nim;
     }
 
-    public List<Laporan> getLaporans() {
-        return laporans;
-    }
-
-    public void setLaporans(List<Laporan> laporans) {
-        this.laporans = laporans;
-    }
+//    public List<Laporan> getLaporans() {
+//        return laporans;
+//    }
+//
+//    public void setLaporans(List<Laporan> laporans) {
+//        this.laporans = laporans;
+//    }
 
     @Override
     public String toString() {
         return "Pelapor{" +
                 "nim='" + nim + '\'' +
-                ", laporans=" + laporans +
+//                ", laporans=" + laporans +
                 '}';
     }
 }
