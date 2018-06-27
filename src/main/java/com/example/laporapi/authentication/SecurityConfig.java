@@ -55,6 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and().authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/laporan/**", "/uploadFile/**")
+                        .permitAll()
                     .antMatchers(HttpMethod.GET, "/**")
                         .hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/pelapor/**", "/petugas/**")
@@ -63,8 +65,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .hasRole("ADMIN")
                     .antMatchers(HttpMethod.DELETE, "/**")
                         .hasRole("ADMIN")
-                    .antMatchers(HttpMethod.POST, "/laporan/**", "/uploadFile/**")
-                        .anonymous()
                 .and().csrf().disable().headers().frameOptions().disable();
     }
 
