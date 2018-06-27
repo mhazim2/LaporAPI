@@ -53,13 +53,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests()
                     .antMatchers(HttpMethod.POST, "/laporan/**", "/uploadFile/**")
                         .anonymous()
-                    .antMatchers(HttpMethod.GET, "/petugas/**")
+                    .antMatchers(HttpMethod.GET, "/**")
                         .hasRole("ADMIN")
-                    .antMatchers(HttpMethod.POST, "/petugas/**")
-                        .anonymous()
-                    .antMatchers(HttpMethod.PUT, "/petugas/**")
+                    .antMatchers(HttpMethod.POST, "/**")
                         .hasRole("ADMIN")
-                    .antMatchers(HttpMethod.DELETE, "/petugas/**")
+                    .antMatchers(HttpMethod.PUT, "/**")
+                        .hasRole("ADMIN")
+                    .antMatchers(HttpMethod.DELETE, "/**")
                         .hasRole("ADMIN")
                 .and().csrf().disable().headers().frameOptions().disable();
     }
