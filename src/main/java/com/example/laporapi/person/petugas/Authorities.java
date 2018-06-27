@@ -1,14 +1,23 @@
 package com.example.laporapi.person.petugas;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Authorities {
     @Id
+    @NotNull
+    private Long id;
+
+    @NotNull
     private String username;
 
+    @NotNull
     private String authority = "ADMIN";
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id", nullable = false)
+    private Users users;
 
     public Authorities() {
     }

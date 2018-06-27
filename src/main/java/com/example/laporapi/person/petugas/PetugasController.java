@@ -13,11 +13,13 @@ import java.util.List;
 public class PetugasController{
 
     private PetugasRepository petugasRepository;
+    private UsersRepository usersRepository;
     private AuthoritiesRepository authoritiesRepository;
 
     @Autowired
-    public PetugasController(PetugasRepository petugasRepository, AuthoritiesRepository authoritiesRepository) {
+    public PetugasController(PetugasRepository petugasRepository, UsersRepository usersRepository, AuthoritiesRepository authoritiesRepository) {
         this.petugasRepository = petugasRepository;
+        this.usersRepository = usersRepository;
         this.authoritiesRepository = authoritiesRepository;
     }
 
@@ -34,6 +36,7 @@ public class PetugasController{
     @PostMapping("/petugas")
     public Petugas create(@Valid @RequestBody Petugas petugas) {
         petugas.setPassword(new BCryptPasswordEncoder().encode(petugas.getPassword()));
+        usersRepository.save(new Users(petugas.getUsername(), petugas.getPassword()));
         authoritiesRepository.save(new Authorities(petugas.getUsername()));
         return petugasRepository.save(petugas);
     }

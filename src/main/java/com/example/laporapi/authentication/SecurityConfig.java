@@ -28,23 +28,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("dataSource")
     private DataSource dataSource;
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//
-//        auth.jdbcAuthentication().dataSource(dataSource)
-//                .usersByUsernameQuery("select username, password, enabled"
-//                        + " from user where username=?")
-//                .authoritiesByUsernameQuery("select username, authority "
-//                        + "from authorities where username=?")
-//                .passwordEncoder(new BCryptPasswordEncoder());
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
-                .withUser("test").password("test123").roles("USER").and()
-                .withUser("test1").password("test123").roles("ADMIN");
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery("select username, password, enabled"
+                        + " from users where username=?")
+                .authoritiesByUsernameQuery("select username, authority "
+                        + "from authorities where username=?")
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
+
+//        @Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception{
+//        auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
+//                .withUser("test").password("test123").roles("USER").and()
+//                .withUser("test1").password("test123").roles("ADMIN");
+//    }
 
     // Authorization : Role -> Access
     @Override
@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.GET, "/petugas/**")
                         .hasRole("ADMIN")
                     .antMatchers(HttpMethod.POST, "/petugas/**")
-                        .hasRole("ADMIN")
+                        .anonymous()
                     .antMatchers(HttpMethod.PUT, "/petugas/**")
                         .hasRole("ADMIN")
                     .antMatchers(HttpMethod.DELETE, "/petugas/**")
