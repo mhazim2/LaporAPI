@@ -5,25 +5,22 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 public class Authorities {
-    @Id
-    @NotNull
-    private Long id;
-
     @NotNull
     private String username;
 
     @NotNull
-    private String authority = "ADMIN";
+    private String authority = "ROLE_ADMIN";
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", nullable = false)
+    @JoinColumn(name = "username", nullable = false)
     private Users users;
 
     public Authorities() {
     }
 
-    public Authorities(String username) {
+    public Authorities(String username, Users users) {
         this.username = username;
+        this.users = users;
     }
 
     public String getUsername() {
@@ -40,5 +37,13 @@ public class Authorities {
 
     public void setAuthority(String authority) {
         this.authority = authority;
+    }
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
     }
 }

@@ -15,16 +15,17 @@ public class Users {
     @NotNull
     private short enable = 1;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "petugas_id", nullable = false)
-    private Petugas petugas;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "petugas_id", nullable = false)
+//    private Petugas petugas;
 
     public Users() {
     }
 
-    public Users(String username, String password) {
+    public Users(String username, String password, Petugas petugas) {
         this.username = username;
         this.password = password;
+//        this.petugas = petugas;
     }
 
     public String getUsername() {
@@ -51,11 +52,11 @@ public class Users {
         this.enable = enable;
     }
 
-    public Petugas getPetugas() {
-        return petugas;
-    }
-
-    public void setPetugas(Petugas petugas) {
-        this.petugas = petugas;
-    }
+//    public Petugas getPetugas() {
+//        return petugas;
+//    }
+//
+//    public void setPetugas(Petugas petugas) {
+//        this.petugas = petugas;
+//    }
 }

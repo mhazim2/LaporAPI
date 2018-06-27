@@ -37,9 +37,11 @@ public class PetugasController{
     @PostMapping("/petugas")
     public Petugas create(@Valid @RequestBody Petugas petugas) {
         petugas.setPassword(new BCryptPasswordEncoder().encode(petugas.getPassword()));
-        usersRepository.save(new Users(petugas.getUsername(), petugas.getPassword()));
-        authoritiesRepository.save(new Authorities(petugas.getUsername()));
-        return petugasRepository.save(petugas);
+        petugasRepository.save(petugas);
+        Users users = new Users(petugas.getUsername(), petugas.getPassword(), petugas);
+        usersRepository.save(users);
+        authoritiesRepository.save(new Authorities(petugas.getUsername(), users));
+        return petugas;
     }
 
     @PutMapping("/petugas/{id}")
