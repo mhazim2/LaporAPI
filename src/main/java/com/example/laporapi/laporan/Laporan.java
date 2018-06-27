@@ -27,8 +27,8 @@ public class Laporan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @ManyToOne
-    @JoinColumn(name="pelapor_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pelapor_id", nullable = false)
     protected Pelapor pelapor;
 
     @NotBlank
