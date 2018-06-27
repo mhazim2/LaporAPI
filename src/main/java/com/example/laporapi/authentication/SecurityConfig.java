@@ -37,6 +37,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username, authority "
                         + "from authorities where username=?")
                 .passwordEncoder(new BCryptPasswordEncoder());
+
+        auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .withUser("admin").password("admin123").roles("ADMIN");
+//        .and().withUser("test1").password("test123").roles("ADMIN");
     }
 
 //        @Override
