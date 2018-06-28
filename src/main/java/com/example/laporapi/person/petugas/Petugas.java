@@ -1,7 +1,6 @@
 package com.example.laporapi.person.petugas;
 
 import com.example.laporapi.person.Person;
-import sun.plugin.util.UserProfile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
