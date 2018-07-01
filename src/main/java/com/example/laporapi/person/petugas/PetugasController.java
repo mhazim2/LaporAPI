@@ -58,16 +58,16 @@ public class PetugasController{
         petugas.setUsername(body.getUsername());
         petugas.setEmail(body.getEmail());
         petugas.setNo_hp(body.getNo_hp());
-        usersRepository.save(usersRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         authoritiesRepository.save(authoritiesRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
+        usersRepository.save(usersRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         return petugasRepository.save(petugas);
     }
 
     @DeleteMapping("/petugas/{id}")
     public void delete(@PathVariable(value = "id") Long id) {
         Petugas petugas = petugasRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("ID" + id.toString() + "Not Found"));
-        usersRepository.delete(usersRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         authoritiesRepository.delete(authoritiesRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
+        usersRepository.delete(usersRepository.findById(petugas.getUsername()).orElseThrow(() -> new ResourceNotFoundException("ID" + petugas.getUsername() + "Not Found")));
         petugasRepository.delete(petugas);
     }
 }

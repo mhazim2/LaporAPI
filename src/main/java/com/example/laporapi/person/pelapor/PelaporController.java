@@ -2,10 +2,12 @@ package com.example.laporapi.person.pelapor;
 
 import com.example.laporapi.exceptionhandler.ResourceNotFoundException;
 import com.example.laporapi.laporan.Laporan;
+import com.example.laporapi.laporan.LaporanRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -13,10 +15,12 @@ import java.util.List;
 public class PelaporController {
 
     private PelaporRepository pelaporRepository;
+    private LaporanRepository laporanRepository;
 
     @Autowired
-    public PelaporController(PelaporRepository pelaporRepository) {
+    public PelaporController(PelaporRepository pelaporRepository, LaporanRepository laporanRepository) {
         this.pelaporRepository = pelaporRepository;
+        this.laporanRepository = laporanRepository;
     }
 
     @GetMapping("/pelapor")
@@ -70,6 +74,10 @@ public class PelaporController {
     @DeleteMapping("/pelapor/{id}")
     public void delete(@PathVariable Long id){
         Pelapor pelapor = pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
+        List<Laporan> laporans = laporanRepository.findByPelaporId(id);
+        for (Laporan temp : laporans) {
+            laporanRepository.delete(temp);
+        }
         pelaporRepository.delete(pelapor);
     }
 }
