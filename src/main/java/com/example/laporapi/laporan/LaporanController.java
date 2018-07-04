@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/api")
 public class LaporanController {
 
     private LaporanRepository laporanRepository;
@@ -56,7 +57,7 @@ public class LaporanController {
         laporan.setJenis_laporan(body.getJenis_laporan());
         laporan.setStatus(body.getStatus());
         laporan.setTempat(body.getTempat());
-        return laporan;
+        return laporanRepository.save(laporan);
     }
 
     @DeleteMapping("/laporan/{id}")

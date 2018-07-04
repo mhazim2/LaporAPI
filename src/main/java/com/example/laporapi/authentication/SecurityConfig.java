@@ -55,21 +55,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic()
                 .and().authorizeRequests()
-                    .antMatchers(HttpMethod.POST, "/pelapor/**", "/laporan/**", "/uploadFile/**")
+                    .antMatchers(HttpMethod.POST, "/api/pelapor/**", "/api/laporan/**", "/api/uploadFile/**")
                         .permitAll()
-                    .antMatchers(HttpMethod.GET, "/**")
+                    .antMatchers(HttpMethod.GET, "/api/**")
                         .hasRole("ADMIN")
-                    .antMatchers(HttpMethod.POST, "/petugas/**")
+                    .antMatchers(HttpMethod.POST, "/api/petugas/**")
                         .hasRole("ADMIN")
-                    .antMatchers(HttpMethod.PUT, "/**")
+                    .antMatchers(HttpMethod.PUT, "/api/**")
                         .hasRole("ADMIN")
-                    .antMatchers(HttpMethod.DELETE, "/**")
+                    .antMatchers(HttpMethod.DELETE, "/api/**")
                         .hasRole("ADMIN")
                 .and().csrf().disable().headers().frameOptions().disable();
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/**");
+        web.ignoring().antMatchers(HttpMethod.OPTIONS, "/api/**");
     }
 }
