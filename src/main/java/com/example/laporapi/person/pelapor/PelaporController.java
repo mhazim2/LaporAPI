@@ -28,16 +28,9 @@ public class PelaporController {
         return pelaporRepository.findAll();
     }
 
-//    @GetMapping("/pelapor/laporan")
-//    public List<Laporan> indexLaporans(){
-//        List<Pelapor> pelapor = pelaporRepository.findAll();
-//        return
-//    }
-
     @GetMapping("/pelapor/{id}")
     public Pelapor show(@PathVariable(value = "id") Long id){
         return pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
-//        return pelaporRepository.findByIDq(id);
     }
 
     @GetMapping("/pelapor/nim/{nim}")
@@ -45,19 +38,8 @@ public class PelaporController {
         return pelaporRepository.findByNim(nim);
     }
 
-//    @GetMapping("/pelapor/{id}/laporan")
-//    public List<Laporan> showLaporans(@PathVariable(value = "id") Long id){
-//        Pelapor pelapor = pelaporRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Id "+id.toString()+" not found"));
-//        return pelapor.getLaporans();
-//    }
-
     @PostMapping("/pelapor")
     public Pelapor create(@Valid @RequestBody Pelapor pelapor){
-        /*String nama = body.get("nama");
-        String email = body.get("email");
-        String nim = body.get("nim");
-        String no_hp = body.get("no_hp");
-        return pelaporRepository.save(new Pelapor(nama,email,no_hp,nim));*/
         return pelaporRepository.save(pelapor);
     }
 
